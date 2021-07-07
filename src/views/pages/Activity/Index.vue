@@ -24,7 +24,7 @@
                                         outlined
                                         @click="showDetail(item.id)"
                                     >
-                                        <div class="d-flex flex-no-wrap justify-space-between">
+                                        <div v-if="item.st == 'ternak'" class="d-flex flex-no-wrap justify-space-between">
                                             <div>
                                                 <v-card-title
                                                 class="subtitle-1"
@@ -60,7 +60,46 @@
                                                 size="150"
                                                 tile
                                             >
-                                                <v-img :src="item.file_path" ></v-img>
+                                                <v-img :src="item.file_ternak" ></v-img>
+                                            </v-avatar>
+                                        </div>
+                                        <div v-else class="d-flex flex-no-wrap justify-space-between">
+                                             <div>
+                                                <v-card-title
+                                                class="subtitle-1"
+                                                >{{toUpperCase(item.produk_nama)}}</v-card-title>
+                            
+                                                <v-card-subtitle>
+                                                    Harga : Rp. {{formatPrice(item.total_harga)}} <br/>
+                                                    <v-chip 
+                                                    small
+                                                    class="mt-1"
+                                                    color="orange"
+                                                    outlined
+                                                    label
+                                                    v-if="item.transaksi_st == 'PENDING'"
+                                                    >
+                                                        Menunggu Pembayaran
+                                                    </v-chip>
+                                                    
+                                                </v-card-subtitle>
+                                                <v-card-actions class="ml-2">
+                                                    <v-btn
+                                                    color="orange lighten-2"
+                                                    dark
+                                                    :to="'payment/'+item.id"
+                                                    >
+                                                    Checkout
+                                                    </v-btn>
+                                                </v-card-actions>
+                                            </div>
+
+                                            <v-avatar
+                                                class="ma-3"
+                                                size="150"
+                                                tile
+                                            >
+                                                <v-img :src="item.file_produk" ></v-img>
                                             </v-avatar>
                                         </div>
                                     </v-card>
@@ -83,7 +122,7 @@
                                         elevation="1"
                                         outlined
                                     >
-                                        <div class="d-flex flex-no-wrap justify-space-between">
+                                        <div v-if="item.st == 'ternak'" class="d-flex flex-no-wrap justify-space-between">
                                             <div>
                                                 <v-card-title
                                                 class="text-h6"
@@ -117,7 +156,44 @@
                                                 size="125"
                                                 tile
                                             >
-                                                <v-img :src="item.file_path" ></v-img>
+                                                <v-img :src="item.file_ternak" ></v-img>
+                                            </v-avatar>
+                                        </div>
+                                        <div v-else class="d-flex flex-no-wrap justify-space-between">
+                                             <div>
+                                                <v-card-title
+                                                class="subtitle-1"
+                                                >{{toUpperCase(item.produk_nama)}}</v-card-title>
+                            
+                                                <v-card-subtitle>
+                                                    Harga : Rp. {{formatPrice(item.total_harga)}} <br/>
+                                                    <v-chip 
+                                                    label
+                                                    small
+                                                    class="mt-1"
+                                                    color="success"
+                                                    outlined
+                                                    v-if="item.transaksi_st == 'PAID'">
+                                                        Sudah Dibayar
+                                                    </v-chip>
+                                                </v-card-subtitle>
+                                                <v-card-actions class="ml-2">
+                                                    <v-btn
+                                                    color="green lighten-2"
+                                                    dark
+                                                    @click="btnConfirmation(item.id)"
+                                                    >
+                                                    Sudah Diterima
+                                                    </v-btn>
+                                                </v-card-actions>
+                                            </div>
+
+                                            <v-avatar
+                                                class="ma-3"
+                                                size="150"
+                                                tile
+                                            >
+                                                <v-img :src="item.file_produk" ></v-img>
                                             </v-avatar>
                                         </div>
                                     </v-card>
@@ -143,37 +219,69 @@
                 </v-card-title>
 
                 <v-card-text>
-                    <div class="mt-3">
-                    <v-row>
-                        <v-col cols="4">Nama Ternak</v-col>
-                        <v-col cols="1">:</v-col>
-                        <v-col cols="7">{{detail.ternak_nama}}</v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="4">Deskripsi</v-col>
-                        <v-col cols="1">:</v-col>
-                        <v-col cols="12" class="text-justify">{{detail.ternak_deskripsi}}</v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="4">Harga</v-col>
-                        <v-col cols="1">:</v-col>
-                        <v-col cols="7">Rp. {{formatPrice(detail.total_harga)}}</v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="4">Penerima</v-col>
-                        <v-col cols="1">:</v-col>
-                        <v-col cols="7">{{detail.nama_penerima}}</v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="4">Alamat Penerima</v-col>
-                        <v-col cols="1">:</v-col>
-                        <v-col cols="7">{{detail.detail_alamat}}, {{detail.city_name}}, {{detail.province}}</v-col>
-                    </v-row>
-                    <v-row>
-                        <v-col cols="4">Catatan</v-col>
-                        <v-col cols="1">:</v-col>
-                        <v-col cols="7">{{detail.transaksi_note}}</v-col>
-                    </v-row>
+                    <div v-if="detail.st == 'ternak'" class="mt-3">
+                        <v-row>
+                            <v-col cols="4">Nama Ternak</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.ternak_nama}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Deskripsi</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="12" class="text-justify">{{detail.ternak_deskripsi}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Harga</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">Rp. {{formatPrice(detail.total_harga)}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Penerima</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.nama_penerima}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Alamat Penerima</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.detail_alamat}}, {{detail.city_name}}, {{detail.province}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Catatan</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.transaksi_note}}</v-col>
+                        </v-row>
+                    </div>
+                    <div v-else class="mt-3">
+                        <v-row>
+                            <v-col cols="4">Nama Produk</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.produk_nama}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Deskripsi</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="12" class="text-justify">{{detail.produk_deskripsi}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Harga</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">Rp. {{formatPrice(detail.total_harga)}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Penerima</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.nama_penerima}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Alamat Penerima</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.detail_alamat}}, {{detail.city_name}}, {{detail.province}}</v-col>
+                        </v-row>
+                        <v-row>
+                            <v-col cols="4">Catatan</v-col>
+                            <v-col cols="1">:</v-col>
+                            <v-col cols="7">{{detail.transaksi_note}}</v-col>
+                        </v-row>
                     </div>
                 </v-card-text>
 

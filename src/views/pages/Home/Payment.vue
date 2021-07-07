@@ -5,72 +5,101 @@
           <v-col cols="12" lg="6" class="mx-auto">
             <v-container fluid fill-height>
               <v-layout align-center justify-center>
-                  <v-flex xs12 sm12 md12>
-                      
-                      <v-row class="mt-12">
-                          <v-col cols="12">
-                          <v-card flat>
-                          
-
-                          <v-card-text>
-                            <h3 class="subtitle font-weight-bold ma-3"> 
-                              Detail Pemesanan 
-                            </h3>
-                            <v-divider></v-divider>
-                            <div class="ma-3">
-                              <v-row>
-                                <v-col cols="12">
-                                  <v-img height="200" width="100%" :src="data.file_path" ></v-img>
-                                </v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Penerima</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">{{data.nama_penerima}}</v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Detail Alamat</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">{{data.detail_alamat}}</v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Hewan Ternak</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">{{data.ternak_nama}}</v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Masa perawatan</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">{{data.masa_perawatan}} Bulan</v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Harga Ternak</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">Rp. {{formatPrice(data.ternak_harga)}}</v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Harga Perawatan</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">Rp. {{formatPrice(data.perawatan_harga*data.masa_perawatan)}}</v-col>
-                              </v-row>
-                              <v-row>
-                                <v-col cols="5">Harga Pengiriman</v-col>
-                                <v-col cols="1">:</v-col>
-                                <v-col cols="6">Rp. {{formatPrice(data.harga_ongkir)}}</v-col>
-                              </v-row>
-                            </div>
-                          </v-card-text>
-                          <v-divider class="mx-4"></v-divider>
-                          <v-card-text class="text-right">
-                            <v-spacer></v-spacer>
-                            <span class="subtitle font-weight ml-auto mr-3"
-                                      > Total Pembayaran</span>
-                                      <span class="subtitle font-weight-bold ml-auto mr-3">
-                                          Rp {{formatPrice(data.total_harga)}}
-                                      </span>
-                                      
-                          </v-card-text>
-                          <v-card-actions>
+                <v-flex xs12 sm12 md12>
+                  <v-row class="mt-12">
+                    <v-col cols="12">
+                      <v-card flat>
+                        <v-card-text>
+                          <h3 class="subtitle font-weight-bold ma-3"> 
+                            Detail Pemesanan 
+                          </h3>
+                          <v-divider></v-divider>
+                          <div v-if="data.st == 'ternak'" class="ma-3">
+                            <v-row>
+                              <v-col cols="12">
+                                <v-img class="my-2" height="250" width="100%" :src="data.file_ternak" ></v-img>
+                              </v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Penerima</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.nama_penerima}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Detail Alamat</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.detail_alamat}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Hewan Ternak</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.ternak_nama}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Masa perawatan</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.masa_perawatan}} Bulan</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Harga Ternak</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">Rp. {{formatPrice(data.ternak_harga)}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Harga Perawatan</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">Rp. {{formatPrice(data.perawatan_harga*data.masa_perawatan)}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Harga Pengiriman</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">Rp. {{formatPrice(data.harga_ongkir)}}</v-col>
+                            </v-row>
+                          </div>
+                          <div v-else>
+                            <v-row>
+                              <v-col cols="12">
+                                <v-img class="my-2" height="250" width="100%" :src="data.file_produk" ></v-img>
+                              </v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Penerima</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.nama_penerima}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Detail Alamat</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.detail_alamat}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Produk</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">{{data.produk_nama}}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Harga Produk</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">Rp. {{ formatPrice(data.ternak_harga) }} / {{ data.qty }} {{ toUpperCase(data.produk_jenis) }}</v-col>
+                            </v-row>
+                            <v-row>
+                              <v-col cols="5">Harga Pengiriman</v-col>
+                              <v-col cols="1">:</v-col>
+                              <v-col cols="6">Rp. {{formatPrice(data.harga_ongkir)}}</v-col>
+                            </v-row>
+                          </div>
+                        </v-card-text>
+                        <v-divider class="mx-4"></v-divider>
+                        <v-card-text class="text-right">
+                          <v-spacer></v-spacer>
+                          <span class="subtitle font-weight ml-auto mr-3"
+                                    > Total Pembayaran</span>
+                                    <span class="subtitle font-weight-bold ml-auto mr-3">
+                                        Rp {{formatPrice(data.total_harga)}}
+                                    </span>
+                                    
+                        </v-card-text>
+                        <v-card-actions>
                           <v-btn
                             color="orange lighten-2"
                             block
@@ -89,13 +118,13 @@
                             Bayar Sekarang
                           </span>
                           </v-btn>
-                          </v-card-actions>
-                        </v-card>
-                          </v-col>
-                      </v-row>
-                  </v-flex>
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-flex>
               </v-layout>
-          </v-container>
+            </v-container>
           </v-col>
         </v-row>
     </div>
@@ -140,7 +169,11 @@ export default {
         let val = (value/1).toFixed(0).replace('.', ',')
         return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
     },
-
+    toUpperCase(value){
+        if(!value) return ''
+            value = value.toString()
+        return value.toUpperCase()
+    },
     // testPay(){
     //     this.parameter.order_id = this.data.order_id;
     //     this.parameter.gross_amount = this.data.ternak_harga;

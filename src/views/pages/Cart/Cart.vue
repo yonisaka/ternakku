@@ -8,26 +8,14 @@
           :key="i"
           cols="12"
         >
-          <v-card class="mt-3">
-              <!-- <v-avatar
-                size="125"
-                tile
-              >
-                <v-img :src="item.file_path" 
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"></v-img>
-              </v-avatar> -->
+          <v-card v-if="item.st == 'ternak'" class="mt-3">
                 <v-img
                   class="white--text align-end"
-                  height="200px"
-                  :src="item.file_path" 
+                  height="250px"
+                  :src="item.file_ternak" 
                 >
-                  <v-card-title>{{item.ternak_nama}}</v-card-title>
                 </v-img>
-                <!-- <v-card-title
-                  class="text-h5"
-                  v-text="item.ternak_nama"
-                ></v-card-title> -->
-
+                <v-card-title>{{item.ternak_nama}}</v-card-title>
                 <v-card-text> {{subStr(item.ternak_deskripsi)}}</v-card-text>
                 <v-card-subtitle>
                   <v-row>
@@ -131,43 +119,6 @@
                               <v-col cols="7">{{item.transaksi_note}}</v-col>
                             </v-row>
                           </div>
-                          <!-- <table class="table">
-                            <tbody>
-                              <tr>
-                                <td>Nama Ternak</td>
-                                <td> : </td>
-                                <td>{{item.ternak_nama}}</td>
-                              </tr>
-                              <tr>
-                                <td>Deskripsi</td>
-                                <td> : </td>
-                                <td>{{item.ternak_deskripsi}}</td>
-                              </tr>
-                              <tr>
-                                <td>Harga</td>
-                                <td> : </td>
-                                <td>{{formatPrice(item.ternak_harga)}}</td>
-                              </tr>
-                              <tr>
-                                <td>Penerima</td>
-                                <td> : </td>
-                                <td>{{item.nama_penerima}}</td>
-                              </tr>
-                              <tr>
-                                <td>Detail Alamat</td>
-                                <td> : </td>
-                                <td>{{item.detail_alamat}},
-                                    {{item.city_name}}, 
-                                    {{item.province}}
-                                  </td>
-                              </tr>
-                              <tr>
-                                <td>Note</td>
-                                <td> : </td>
-                                <td>{{item.transaksi_note}}</td>
-                              </tr>
-                            </tbody>
-                            </table> -->
                         </v-card-text>
 
                         <v-divider></v-divider>
@@ -187,6 +138,46 @@
                     </v-dialog>
                   </div>
                 </v-card-actions>
+          </v-card>
+          <v-card v-else class="mt-3">
+            <v-img
+                class="white--text align-end"
+                height="250px"
+                :src="item.file_produk" 
+              >
+              </v-img>
+              <v-card-title>{{item.produk_nama}}</v-card-title>
+              <v-card-subtitle>{{ item.qty }} {{ toUpperCase(item.produk_jenis) }}</v-card-subtitle>
+              <v-card-text> {{subStr(item.produk_deskripsi)}}</v-card-text>
+              <v-card-text>
+                <v-row>
+                  <v-col cols="5">Harga Produk</v-col>
+                  <v-col cols="1">:</v-col>
+                  <v-col cols="6">
+                    <div class="subtitle font-weight-bold" color="#FF8F0B">
+                      Rp. {{ formatPrice(item.ternak_harga) }} / {{ item.qty }} {{ toUpperCase(item.produk_jenis) }}
+                    </div>
+                  </v-col>
+                </v-row>
+                <v-row>
+                  <v-col cols="5">Harga Pengiriman</v-col>
+                  <v-col cols="1">:</v-col>
+                  <v-col cols="6">
+                    <div class="subtitle font-weight-bold" color="#FF8F0B">
+                      Rp. {{ formatPrice(item.harga_ongkir) }}
+                    </div>
+                  </v-col>
+                </v-row>
+              </v-card-text>
+              <v-card-actions>
+                <v-btn
+                color="orange lighten-2"
+                dark
+                :to="'payment/'+item.id"
+              >
+                Checkout
+              </v-btn>
+              </v-card-actions>
           </v-card>
         </v-col>
       </v-row>
@@ -222,7 +213,6 @@ export default {
   methods:{
     setCarts(data) {
       this.carts = data;
-      console.log(this.carts);
     },
     subStr(value) {
       return value.substring(0,100) + '...';
@@ -230,7 +220,12 @@ export default {
     formatPrice(value) {
       let val = (value/1).toFixed(2).replace('.', ',')
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")
-    }
+    },
+    toUpperCase(value){
+        if(!value) return ''
+            value = value.toString()
+        return value.toUpperCase()
+    },
   },
 
   mounted() {

@@ -15,8 +15,8 @@
                             <div class="display-1 font-weight-bold my-3">
                             Daftar Akun Baru
                             </div>
-                            <ul v-if="errors" class="red--text my-3">
-                                <li v-for="(v, k) in errors" :key="k"> {{ v[0] | error }}</li>
+                            <ul v-if="error" class="red--text my-3">
+                                <li v-for="(v, k) in error" :key="k"> {{ v[0] }}</li>
                             </ul>
                             <v-form @submit.prevent="onSubmit" id="register">
                                 <v-row>
@@ -197,6 +197,7 @@ export default {
             menu: false,
             dialog: false,
             isLoading: false,
+            error:""
         }
     },
     computed: {
@@ -230,31 +231,20 @@ export default {
             this.form.user_st = 'Tidak Aktif'
                 ApiService.setHeader();
                 ApiService.post("users", this.form)
-                .then((res) => {
-                    this.form.id_user = res.data.user.id
-                    ApiService.post("customer", this.form)
-                    .then(() => {
-                        this.dialog = true
-                        // this.$router.push({ path: '/login'})
-                        this.isLoading = false
-                        this.snackbar = true
-                        this.message = 'Berhasil Pendaftaran'
-                        this.color = '#139CA4'
-                        // setTimeout( () => this.$router.push({ path: '/login'}), 2000);
-                    })
-                    .catch((err) => {
-                        this.errors = err.response.data
-                        this.snackbar = true
-                        this.message = 'Gagal Pendaftaran'
-                        this.color = 'red'
-                        this.isLoading = false
-                    });
+                .then(() => {
+                    this.dialog = true
+                    this.isLoading = false
+                    this.snackbar = true
+                    this.message = 'Berhasil Pendaftaran'
+                    this.color = '#139CA4'
+                    
                 })
 
                 .catch((err) => {
-                    this.errors = err.response.data
+                    this.error = err.response.data
+                    // console.log(this.errors)
                     this.snackbar = true
-                    this.message = 'Gagal Pendaftaran'
+                    this.message = "Terjadi Kesalahan"
                     this.color = 'red'
                     this.isLoading = false
                 });

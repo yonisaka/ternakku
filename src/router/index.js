@@ -161,6 +161,35 @@ const router = new Router({
       //   requiresAuth: false
       // }
     },
+    {
+      path: '/produk',
+      component: () => import("@/views/pages/Index"),
+      children: [
+        {
+          path: '',
+          name: 'produk',
+          components: {
+            header: AppHeader,
+            default : () => import("@/views/pages/Produk/Index"),
+            footer: AppFooter
+          }
+        },
+        {
+          path: 'detail/:id',
+          component: () => import("@/views/pages/Produk/Detail")
+        },
+        {
+          path: 'detail/add/:id',
+          component: () => import("@/views/pages/Produk/Add"),
+          meta: {
+            requiresAuth: false
+          }
+        },
+      ],
+      // meta: {
+      //   requiresAuth: false
+      // }
+    },
   ]
 });
 
