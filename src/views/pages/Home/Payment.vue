@@ -101,7 +101,7 @@
                         </v-card-text>
                         <v-card-actions>
                           <v-btn
-                            color="orange lighten-2"
+                            color="#3962F5"
                             block
                             dark
                             v-on:click="createInvoice()"

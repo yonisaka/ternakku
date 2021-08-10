@@ -71,7 +71,7 @@
                         >
                           <template v-slot:activator="{ on, attrs }">
                             <v-btn
-                              color="#139CA4"
+                              color="#3962F5"
                               dark
                               v-bind="attrs"
                               v-on="on"

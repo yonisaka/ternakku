@@ -63,7 +63,7 @@
                     >
                       <template v-slot:activator="{ on, attrs }">
                         <v-btn
-                          color="#139CA4"
+                          color="#FE9A34"
                           dark
                           v-bind="attrs"
                           v-on="on"
@@ -73,7 +73,7 @@
                         </v-btn>
                         <br>
                         <v-btn
-                          color="orange lighten-2"
+                          color="#3962F5"
                           dark
                           :to="'payment/'+item.id"
                         >

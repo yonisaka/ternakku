@@ -109,7 +109,7 @@
                             <v-btn 
                             type="submit"
                             class="white--text font-weight-bold"
-                            color="#139CA4"
+                            color="#3962F5"
                             block
                             form="register"
                             :disabled="isLoading"
@@ -236,7 +236,7 @@ export default {
                     this.isLoading = false
                     this.snackbar = true
                     this.message = 'Berhasil Pendaftaran'
-                    this.color = '#139CA4'
+                    this.color = '#3962F5'
                     
                 })
 

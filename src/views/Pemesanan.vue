@@ -235,7 +235,7 @@
         <v-dialog v-model="dialogInfo" max-width="500px">
             <v-card>
                 <v-card-title class="headline">
-                    <h1 class="mx-auto my-3"><v-icon color="#139CA4" x-large>mdi-checkbox-marked-circle-outline</v-icon></h1>
+                    <h1 class="mx-auto my-3"><v-icon color="#3962F5" x-large>mdi-checkbox-marked-circle-outline</v-icon></h1>
                     <div class="subtitle-1"> 
                         Terima kasih, <br>
                         ternakmart.id akan mengirimkan rincian
@@ -322,7 +322,7 @@ export default {
                 this.isLoading = false
                 this.snackbar = true
                 this.message = 'Berhasil Simpan Data'
-                this.color = '#139CA4'
+                this.color = '#3962F5'
                 
             })
             .catch((err) => {

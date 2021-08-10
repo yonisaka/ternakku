@@ -46,7 +46,7 @@
                                                 </v-card-subtitle>
                                                 <v-card-actions class="ml-2">
                                                     <v-btn
-                                                    color="orange lighten-2"
+                                                    color="#3962F5"
                                                     dark
                                                     :to="'payment/'+item.id"
                                                     >
@@ -85,7 +85,7 @@
                                                 </v-card-subtitle>
                                                 <v-card-actions class="ml-2">
                                                     <v-btn
-                                                    color="orange lighten-2"
+                                                    color="#3962F5"
                                                     dark
                                                     :to="'payment/'+item.id"
                                                     >
@@ -291,7 +291,7 @@
                     <v-spacer></v-spacer>
                     
                     <v-btn
-                    color="orange lighten-2"
+                    color="#3962F5"
                     dark
                     :to="'payment/'+detail.id"
                 >

@@ -44,12 +44,12 @@
                     align="left"
                 >
                     <span class="subtitle-2 font-weight-medium" > {{ toUpperCase(ternak.ternak_nama) }}</span> <br>
-                    <small style="color:#139CA4;">Dibawah Pengawasan <br/> 
+                    <small style="color:#3962F5;">Dibawah Pengawasan <br/> 
                         <span v-if="ternak.dokter_nama == ''">{{ternak.dokter_nama}}</span>
                         <span v-else>{{ternak.admin_nama}}</span>
                     </small>
                     <div class="subtitle font-weight-bold">
-                        <span style="color:#fca311;">Rp. {{ formatPrice(ternak.harga_perkilo) }}</span>
+                        <span style="color:#FE9A34;">Rp. {{ formatPrice(ternak.harga_perkilo) }}</span>
                         <span> / Kg</span> <br>
                         <!-- <small v-bind:class="(ternak.diskon_st == 1) ?'text-decoration-line-through': ''">Rp. {{formatPrice(ternak.harga_perkilo*ternak.ternak_berat)}}</small> <br> -->
                         <small v-if="ternak.diskon_st == 1"> Rp. {{formatPrice((ternak.harga_perkilo*ternak.ternak_berat)-ternak.diskon_harga)}} </small>
@@ -71,7 +71,7 @@
                         color="grey"
                     >
                         <v-btn
-                        color="#139CA4"
+                        color="#3962F5"
                         :to="'detail/'+ternak.id"
                         >Lihat Kurban</v-btn>
                     </v-overlay>

@@ -37,7 +37,7 @@
                         color="grey"
                     >
                         <v-btn
-                        color="#139CA4"
+                        color="#3962F5"
                         :to="'produk/detail/'+produk.id"
                         >Lihat Produk</v-btn>
                     </v-overlay>

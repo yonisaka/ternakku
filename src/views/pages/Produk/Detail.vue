@@ -38,20 +38,20 @@
                             <v-col>
                                 <div class="title font-weight-bold text-center"
                                 >
-                                    <span style="color:#139CA4;">{{data.produk_nama}}</span>
+                                    <span style="color:#3962F5;">{{data.produk_nama}}</span>
                                 </div>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="6">
                                 <div class="subtitle font-weight-bold text-center">
-                                    <b style="color:#139CA4;">{{data.qty}}</b><br>
+                                    <b style="color:#3962F5;">{{data.qty}}</b><br>
                                     QTY
                                 </div>
                             </v-col>
                             <v-col cols="6">
                                 <div class="subtitle font-weight-bold text-center">
-                                    <b style="color:#139CA4;">{{toUpperCase(data.produk_jenis)}}</b><br>
+                                    <b style="color:#3962F5;">{{toUpperCase(data.produk_jenis)}}</b><br>
                                     Jenis 
                                 </div>
                             </v-col>
@@ -66,7 +66,7 @@
                                     flat
                                 >
                                     <v-card-title>
-                                        <div style="color:#139CA4;" class="subtitle font-weight-bold">
+                                        <div style="color:#3962F5;" class="subtitle font-weight-bold">
                                             Deskripsi
                                         </div>
                                     </v-card-title>
@@ -99,7 +99,7 @@
                             </div>
                             <v-spacer></v-spacer>
                             <v-btn
-                            color="#139CA4"
+                            color="#3962F5"
                             class="white--text px-10"
                             :to="{ path: 'add/'+ data.id}"
                             >

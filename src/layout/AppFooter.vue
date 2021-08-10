@@ -5,8 +5,8 @@
         shift
     > -->
     <v-bottom-navigation
-        background-color="#139CA4"
-        color="dark-grey"
+        background-color="#FCFCFF"
+        color="#3962F5"
         class="nav-bottom position"
         fixed
     >
@@ -27,7 +27,7 @@
         <span>Cart</span>
         <v-badge
         overlap
-        color="#139CA4"
+        color="#3962F5"
         v-if="(updateCart ? updateCart.length : jumlah_cart.length)==0"
           :content="updateCart ? updateCart.length : jumlah_cart.length"
           bordered
@@ -37,7 +37,7 @@
         </v-badge>
         <v-badge
         overlap
-        color="#139CA4"
+        color="#3962F5"
         v-else
           :content="updateCart ? updateCart.length : jumlah_cart.length"
           bordered
