@@ -41,7 +41,7 @@
                                 <v-btn 
                                 type="submit"
                                 class="white--text font-weight-bold"
-                                color="#139CA4"
+                                color="#3962F5"
                                 block
                                 form="register"
                                 >

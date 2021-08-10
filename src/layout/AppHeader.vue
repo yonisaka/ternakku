@@ -1,7 +1,7 @@
 <template>
     <!-- <v-card class="overflow-hidden">
         <v-app-bar
-        color="#139CA4"
+        color="#A58A5A"
         flat
         >
             <v-img
@@ -35,7 +35,7 @@ width: 240px;
     </v-card> -->
     <div>
     <v-app-bar
-      color="#139CA4"
+      color="#A58A5A"
       flat
       
     >

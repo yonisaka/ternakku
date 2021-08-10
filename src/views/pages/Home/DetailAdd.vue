@@ -120,7 +120,7 @@
                                 <v-btn 
                                 type="submit"
                                 class="white--text font-weight-bold"
-                                color="#139CA4"
+                                color="#3962F5"
                                 block
                                 form="register"
                                 >
@@ -231,7 +231,7 @@ export default {
                         this.$router.push({ path: "/cart"})
                         this.snackbar = true
                         this.message = 'Berhasil Login'
-                        this.color = '#139CA4'
+                        this.color = '#3962F5'
                     })
                     .catch((err) => console.log(err));
 

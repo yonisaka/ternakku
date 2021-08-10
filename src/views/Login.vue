@@ -40,7 +40,7 @@
                      type="submit"
                      depressed
                      class="white--text font-weight-bold"
-                     color="#139CA4"
+                     color="#3962F5"
                      block
                      form="login"
                      :disabled="isLoading"
@@ -112,7 +112,7 @@ export default {
                   this.isLoading = false
                   this.snackbar = true
                   this.message = 'Berhasil Login'
-                  this.color = '#139CA4'
+                  this.color = '#3962F5'
                   this.$router.push({ name: "home" })
                }
             })

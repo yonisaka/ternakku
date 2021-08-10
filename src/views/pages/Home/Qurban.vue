@@ -1,7 +1,7 @@
 <template>
     <div>
         <v-app-bar
-        color="#139CA4"
+        color="#3962F5"
         flat
         >
             <v-img
@@ -48,7 +48,7 @@
         <v-expand-transition>
             <v-sheet
                 v-if="searchbar"
-                color="#139CA4"
+                color="#3962F5"
                 height="150"
             >
                 <v-container>

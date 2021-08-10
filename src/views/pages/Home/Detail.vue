@@ -37,26 +37,26 @@
                             <v-col>
                                 <div class="title font-weight-bold text-center"
                                 >
-                                    <span style="color:#139CA4;">{{data.ternak_nama}}</span>
+                                    <span style="color:#00000;">{{data.ternak_nama}}</span>
                                 </div>
                             </v-col>
                         </v-row>
                         <v-row>
                             <v-col cols="4">
                                 <div class="subtitle font-weight-bold text-center">
-                                    <b style="color:#139CA4;">{{data.ternak_berat}} KG</b><br>
+                                    <b style="color:#FE9A34;">{{data.ternak_berat}} KG</b><br>
                                     Berat Hidup
                                 </div>
                             </v-col>
                             <v-col cols="4">
                                 <div class="subtitle font-weight-bold text-center">
-                                    <b style="color:#139CA4;">{{data.jenis_nama}}</b><br>
+                                    <b style="color:#FE9A34;">{{data.jenis_nama}}</b><br>
                                     Jenis / Breed
                                 </div>
                             </v-col>
                             <v-col cols="4">
                                 <div class="subtitle font-weight-bold text-center">
-                                    <b style="color:#139CA4;">{{data.ternak_umur}} Bulan</b> <br>
+                                    <b style="color:#FE9A34;">{{data.ternak_umur}} Bulan</b> <br>
                                     Umur
                                 </div>
                             </v-col>
@@ -64,7 +64,7 @@
                         <v-row>
                             <v-col>
                                 <div class=" text-center">
-                                    <span style="color:#139CA4;">Dibawah pengawasan {{data.dokter_nama}}</span>
+                                    <span style="color:#FE9A34;">Dibawah pengawasan {{data.dokter_nama}}</span>
                                 </div>
                             </v-col>
                         </v-row>
@@ -77,7 +77,7 @@
                                     flat
                                 >
                                     <v-card-title>
-                                        <div style="color:#139CA4;" class="subtitle font-weight-bold">
+                                        <div style="color:#00000;" class="subtitle font-weight-bold">
                                             Deskripsi
                                         </div>
                                     </v-card-title>
@@ -112,7 +112,7 @@
                             class="my-1 mx-3"
                             >
                             <div class="subtitle font-weight-bold ml-2">
-                                    <span class="title" style="color:#fca311;">Rp {{formatPrice(data.ternak_harga)}} </span>
+                                    <span class="title" style="color:#FE9A34;">Rp {{formatPrice(data.ternak_harga)}} </span>
                                     <span class="title">/Kg </span> <br>
                                     <small v-if="data.diskon_st == 1">
                                         Diskon Rp. {{formatPrice(data.diskon_harga)}}
@@ -120,7 +120,7 @@
                             </div>
                             <v-spacer></v-spacer>
                             <v-btn
-                            color="#139CA4"
+                            color="#3962F5"
                             class="white--text px-10"
                             :to="{ name: 'detail_add'}"
                             >
