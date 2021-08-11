@@ -88,7 +88,7 @@
                   </svg>
                   <br>
                   <span class="subtitle black--text">
-                  Qurban
+                  Ternak
                   </span>
                 </a>
               </v-col>
@@ -147,7 +147,7 @@
             <v-row>
               <v-col cols="8" >
                 <div class="subtitle font-weight-bold">
-                  Qurban Premium
+                  Ternak Premium
                 </div>
               </v-col>
               <v-col cols="4" class="text-right">
@@ -183,26 +183,117 @@
           </v-col>
         </v-row>
         <v-row justify="space-around" v-if="loading">
-          <v-col lg="2" cols="6" v-for="i in 2" :key="i">
-            <v-sheet
-              :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
-            >
-              <v-skeleton-loader
-                elevation="2"
-                :loading="loading"
-                type="card"
-              ></v-skeleton-loader>
-            </v-sheet>
+          <v-col cols="12" lg="8" class="mx-auto">
+            <v-row>
+              <v-col lg="4" cols="6" v-for="i in options.infinite" :key="i">
+                <v-sheet
+                  :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+                >
+                  <v-skeleton-loader
+                    elevation="2"
+                    :loading="loading"
+                    type="card"
+                  ></v-skeleton-loader>
+                </v-sheet>
+              </v-col>
+            </v-row>
           </v-col>
         </v-row>
         <v-row justify="space-around" v-else>
           <v-col cols="12" lg="8">
-            <slider ref="slider" :options="options">
-                <!-- slideritem wrapped package with the components you need -->
-                <slideritem v-for="ternak in ternaks" :key="ternak.id" style="width:48%; margin-right:2%">
-                  <Card :ternak="ternak"/>
-                </slideritem>
-            </slider>
+            <div v-if="xs" style="width:100%;margin:20px auto;height:300px">
+              <slider ref="slider" :options="options">
+                  <!-- slideritem wrapped package with the components you need -->
+                  <slideritem v-for="ternak in ternaks" :key="ternak.id" style="width:48%;margin-right:2%">
+                    <Card :ternak="ternak"/>
+                  </slideritem>
+              </slider>
+            </div>
+            <div v-else style="width:100%;margin:20px auto;height:300px">
+              <slider ref="slider" :options="options">
+                  <!-- slideritem wrapped package with the components you need -->
+                  <slideritem v-for="ternak in ternaks" :key="ternak.id" style="width:32%;margin-right:2%">
+                    <Card :ternak="ternak"/>
+                  </slideritem>
+              </slider>
+            </div>
+          </v-col>
+        </v-row>
+         <v-row>
+          <v-col lg="8" cols="12" class="mx-auto">
+            <v-row>
+              <v-col cols="8" >
+                <div class="subtitle font-weight-bold">
+                  Produk Qurban
+                </div>
+              </v-col>
+              <v-col cols="4" class="text-right">
+                <a class="subtitle" @click="() => {this.$router.push({ path: '/produk' })}">
+                  Lihat semua
+                </a>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+         <v-row justify="space-around">
+          <v-col
+            cols="12"
+            sm="10"
+            md="8"
+          >
+            <v-sheet
+              class="py-1 px-1"
+            >
+              <v-chip-group
+                :mandatory="mandatory"
+                active-class="primary--text"
+              >
+                <v-chip
+                  v-for="tag in city_produk"
+                  :key="tag.city_id"
+                  @click="searchProduk(tag.city_id)"
+                >
+                  {{ tag.city_name }}
+                </v-chip>
+              </v-chip-group>
+            </v-sheet>
+          </v-col>
+        </v-row>
+        <v-row justify="space-around" v-if="loading">
+          <v-col cols="12" lg="8" class="mx-auto">
+            <v-row>
+              <v-col lg="4" cols="6" v-for="i in options.infinite" :key="i">
+                <v-sheet
+                  :color="`grey ${theme.isDark ? 'darken-2' : 'lighten-4'}`"
+                >
+                  <v-skeleton-loader
+                    elevation="2"
+                    :loading="loading"
+                    type="card"
+                  ></v-skeleton-loader>
+                </v-sheet>
+              </v-col>
+            </v-row>
+          </v-col>
+        </v-row>
+        <v-row justify="space-around" v-else>
+          <v-col cols="12" lg="8">
+            <div v-if="xs" style="width:100%;margin:20px auto;height:300px">
+              <slider ref="slider" :options="options">
+                  <!-- slideritem wrapped package with the components you need -->
+                  <slideritem v-for="produk in produks" :key="produk.id" style="width:48%;margin-right:2%">
+                    <CardProduk :produk="produk"/>
+                  </slideritem>
+              </slider>
+            </div>
+            <div v-else style="width:100%;margin:20px auto;height:300px">
+              <slider ref="slider" :options="options">
+                  <!-- slideritem wrapped package with the components you need -->
+                  <slideritem v-for="produk in produks" :key="produk.id" style="width:32%;margin-right:2%">
+                    <CardProduk :produk="produk"/>
+                  </slideritem>
+              </slider>
+            </div>
           </v-col>
         </v-row>
       </v-container>
@@ -258,6 +349,7 @@
 import { slider, slideritem } from 'vue-concise-slider'
 import Carousel from "@/components/Carousel";
 import Card from "@/components/Card";
+import CardProduk from "@/components/CardProduk";
 // import DialogLogout from "@/components/DialogLogout";
 import { LOGOUT } from "@/store/actions.type";
 import axios from "axios";
@@ -269,6 +361,7 @@ export default {
     Card,
     slider,
     slideritem,
+    CardProduk
     // DialogLogout
   },
   data () {
@@ -276,6 +369,7 @@ export default {
       loading: true,
       dialogLogout: false,
       ternaks: [],
+      produks: [],
       profile:[],
       //Slider configuration [obj]
       options: {
@@ -283,22 +377,33 @@ export default {
         thresholdDistance: 100, // Sliding distance threshold
         thresholdTime: 300, // Sliding time threshold decision
         grabCursor: true, // Scratch style
-        speed: 300 // Sliding speed
+        speed: 300, // Sliding speed
+        infinite: 2,
+        slidesToScroll: 2,
         // timingFunction: 'ease', // Sliding mode
         // loop: false, // Infinite loop
         // autoplay: 0 // Auto play[ms]
       },
       search:{},
       city: [],
+      city_produk: [],
       mandatory: false,
+      xs: false,
+      sm: false,
     }
   },
   methods: {
     setternaks(data) {
       this.ternaks = data;
     },
+    setProduks(data) {
+      this.produks = data;
+    },
     setCity(data) {
       this.city = data;
+    },
+    setCityProduk(data) {
+      this.city_produk = data;
     },
     setProfile(data) {
       this.profile = data;
@@ -324,11 +429,27 @@ export default {
             })))
         .catch((error) => console.log(error))
     },
+    searchProduk(city_id) {
+        this.search.city_id = city_id
+        axios
+        .post("cariproduk",this.search)
+        .then((response) => {
+            console.log(response)
+            this.setProduks(response.data.data)
+        })
+        .catch((error) => console.log(error))
+    },
   },
   beforeMount() {
     this.setProfile(this.$store.state.auth.user)
   },
   mounted() {
+    this.xs = this.$vuetify.breakpoint.xs
+    this.sm = this.$vuetify.breakpoint.sm
+    if (!this.xs){
+      this.options.infinite = 3
+      this.options.slidesToScroll = 3
+    }
     axios
       .get("ternak")
       .then((response) => 
@@ -343,6 +464,19 @@ export default {
     axios
       .get("lokasi/kota_aktif")
       .then((response) => this.setCity(response.data.kota))
+      .catch((error) => console.log(error))
+    axios
+      .get("produk")
+      .then((response) => 
+          {
+              this.loading = false
+              this.setProduks(response.data.data)  
+          }
+        )
+      .catch((error) => console.log(error))
+    axios
+      .get("lokasi/kota_aktif_produk")
+      .then((response) => this.setCityProduk(response.data.kota))
       .catch((error) => console.log(error))
   },
   inject: {
